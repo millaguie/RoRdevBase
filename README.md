@@ -24,13 +24,10 @@ Just run `vagrant up` and grab a nice cup of coffe with cookies.  This will take
 
 And then you are ready to get the fun:
 
-vagrant ssh (to get into the development machine)
-
-cd /vagrant/mybloodystuff (to get into your source code)
-
-bundle  (well... you know...)
-
-rails s (well... you probably also know...(
+    vagrant ssh # (to get into the development machine)
+    cd /vagrant/mybloodystuff # (to get into your source code)
+    bundle # (well... you know...)
+    rails s # (well... you probably also know...(
 
 And you can check your rails server at your own http://localhost:3000
 
