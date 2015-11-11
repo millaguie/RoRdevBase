@@ -1,7 +1,14 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+unless Vagrant.has_plugin?("vagrant-vbguest")
+  raise "Please install the vagrant-vbguest plugin by running `vagrant plugin install vagrant-vbguest`"
+end
 
 VAGRANTFILE_API_VERSION = "2"
+
+# Change this values to meet your host needs
+MEMORY =  2048
+CPU_COUNT = 2
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Let's use debian, It's the same version as in the server
@@ -18,12 +25,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # do you need extra ruby versions?
   #config.vm.provision :shell, path: "install-ruby.sh", args: "2.0.0 rails haml", privileged: false  # Configurate the virtual machine to use 2GB of RAM
   config.vm.provider :virtualbox do |vb|
-    vb.customize ["modifyvm", :id, "--memory", "2048"]
-  config.vm.post_up_message = "OK, now remember some useful commands:
-  vagrant ssh (to get into the development machine)
-  cd /vagrant (to get into the source code)
-  You can check your rails server at your own http://localhost:3000
-  .. and work .. "
+    vb.customize ["modifyvm", :id, "--memory", MEMORY.to_s]
+    vb.customize ["modifyvm", :id, "--cpus", CPU_COUNT.to_s]
+    config.vm.post_up_message = "OK, now remember some useful commands:\nvagrant ssh (to get into the development machine)\ncd /vagrant (to get into the source code)\nYou can check your rails server at your own http://localhost:3000\n.. and work .. "
   end
 
   # Forward the Rails server default port to the host
